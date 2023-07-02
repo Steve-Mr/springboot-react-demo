@@ -19,9 +19,6 @@ class LoginController(
 
     @PostMapping("login")
     fun login(@RequestBody user: User): String {
-        if (userService.validate(user)){
-            return "true"
-        }
-        return "false"
+        return userService.validate(user)
     }
 }

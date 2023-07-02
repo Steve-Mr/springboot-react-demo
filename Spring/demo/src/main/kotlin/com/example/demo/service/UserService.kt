@@ -1,17 +1,19 @@
 package com.example.demo.service
 
-import com.example.demo.datasource.UserDataSource
 import com.example.demo.model.User
+import com.example.demo.repository.UserRepository
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 
 @Service
 class UserService (
-        @Qualifier("test") val userDataSource: UserDataSource
+        @Qualifier("user") val userRepository: UserRepository
 ) {
 
-    fun validate(user: User): Boolean{
+    fun validate(user: User): String{
         print(user)
-        return userDataSource.validateUser(user)
+        val foundUser = userRepository.findUserByUsername(user.username)
+        if (foundUser?.password == user.password) return "true"
+        else return "false"
     }
 }

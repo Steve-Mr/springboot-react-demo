@@ -13,7 +13,7 @@ class UserService (
     fun validate(user: User): String{
         print(user)
         val foundUser = userRepository.findUserByUsername(user.username)
-        if (foundUser?.password == user.password) return "true"
-        else return "false"
+        return if (foundUser?.password == user.password) "true"
+        else "false"
     }
 }
